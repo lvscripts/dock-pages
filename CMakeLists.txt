@@ -35,9 +35,11 @@ if(ENABLE_QT)
 endif()
 
 target_sources(${CMAKE_PROJECT_NAME} PRIVATE
-     src/plugin-main.cpp
-     src/dock-pages.cpp
-     src/dock-pages.hpp)
-target_compile_options(${CMAKE_PROJECT_NAME} PRIVATE /utf-8)
+  src/plugin-main.cpp
+  src/dock-pages.cpp
+  src/dock-pages.hpp)
+
+# /utf-8 versteht nur der Windows-Compiler (MSVC)
+target_compile_options(${CMAKE_PROJECT_NAME} PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/utf-8>)
 
 set_target_properties_plugin(${CMAKE_PROJECT_NAME} PROPERTIES OUTPUT_NAME ${_name})
